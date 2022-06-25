@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { getStoryblokApi } from "@storyblok/react";
 
 export default function Home() {
   return (
@@ -65,5 +66,25 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  )
+  );
+}
+
+export async function getStaticProps() {
+  let slug = "home";
+
+  let sbParams = {
+    version: "draft", // or 'published'
+  };
+
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+
+  return {
+    props: {
+      story: data ? data.story : false,
+      key: data ? data.story.id : false,
+      seo: data ? data.story.content?.seo : {},
+    },
+    revalidate: 3600,
+  };
 }
