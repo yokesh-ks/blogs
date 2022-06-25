@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@storyblok/react": "^1.0.9",
+    "axios": "^0.27.2",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "framer-motion": "^6",
